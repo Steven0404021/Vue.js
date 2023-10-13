@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Fibonacci & Bangun Ruang</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="text-gray-300">
+
+	<header class="z-10 sticky top-0 bg-gray-950 py-10 pb-5"> 
+		<nav class="w-9/12 flex flex-row mx-auto">
+			<div class="uppercase text-lg basis-1/3"> 
+				<a href="#hero">
+					<span class="font-extrabold text-white">Steven</span>
+					<span class="font-semibold text-blue-600">Aleuntian</span>
+				</a>
+			</div>
+			<div class="basis-1/2 flex items-center justify-evenly"> 
+				<a href="../index.html#biografi"><span>Biografi</span></a>
+				<a href="../index.html#sertifikat"><span>Sertifikat</span></a>
+				<a href="../index.html#contact"><span>Kontak</span></a>
+				<a href="fibonaci.html"><span>Fibonaci</span></a>
+                <a href="../belanja/e-com.html">Belanja</a>
+			</div>
+		</nav>
+	</header>
+    <style>
+        body{
+            background-color: rgb(0, 238, 255);
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: rgb(51, 255, 0);
+            color: hsl(0, 0%, 1%);
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-black font-semibold">
+        <h1>Deret Fibonacci</h1>
+        <p>Masukkan n untuk menghitung n angka pertama dalam deret Fibonacci:</p>
+        <input type="number" id="fibonacciInput" placeholder="Angka Valid">
+        <button onclick="hitungFibonacci()">Hitung</button>
+        <p>Hasil:</p>
+    <div id="hasilFibonacci"></div>
+    <br><br>
+    <br><br>
+    <h2>Volume Bangun Ruang</h2>
+        <label for="shape">Pilih jenis bangun ruang:</label>
+        <select id="shape">
+            <option value="kubus">Kubus</option>
+            <option value="bola">Bola</option>
+        </select>
+    <br><br>
+        <input type="number" id="input1" placeholder="Angka">
+        <button onclick="cariVolume()">Hitung Volume</button>
+        <div id="volumeResult"></div>
+    </div>
+
+    <script>
+        function hitungFibonacci() {
+            const n = parseInt(document.getElementById("fibonacciInput").value);
+            let a = 0, b = 1;
+            let hasil = [];
+            for (let i = 0; i < n; i++) {
+                hasil.push(a);
+                const temp = a + b;
+                a = b;
+                b = temp;
+            }
+            document.getElementById("hasilFibonacci").innerText = hasil.join(', ');
+        }
+
+        function cariVolume(){
+            const shapeSelect = document.getElementById('shape');
+            const input1 =  parseFloat(document.getElementById('input1').value);
+
+            const volumeResult = document.getElementById('volumeResult');
+            const selectedShape = shapeSelect.value;
+
+            if (isNaN(input1)){
+                volumeResult.textContent = 'masukkan angka.';
+                return;
+            }
+
+            let volume;
+
+            switch (selectedShape) {
+                case 'kubus':
+                    volume = input1 ** 3;
+                    break;
+                case 'bola':
+                    volume = (4 / 3) * Math.PI * (input1 ** 3);
+                    break;
+                default:
+                    volume = 0;
+                    break;
+            }
+            volumeResult.textContent = `Volume: ${volume.toFixed(1)}`;
+        }
+    </script>
+</body>
+</html>
